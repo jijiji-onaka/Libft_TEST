@@ -74,7 +74,7 @@ static char		**insert_word(char const *s, char c, int wc, char **res)
 	return (res);
 }
 
-char			**split(char const *s, char c)
+char			**_split(char const *s, char c)
 {
 	char	**res;
 	int		wc;

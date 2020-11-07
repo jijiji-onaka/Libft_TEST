@@ -45,6 +45,15 @@ static void		yes_or_no(int flag, char *s)
 
 }
 
+static void	PART(char *s)
+{
+	puts("");
+	printf("\x1b[30m");
+	printf("\x1b[43m%s\x1b[m\n", s);
+	printf("\x1b[39m");
+	puts("");
+}
+
 int main()
 {
 	int		check_flag;
@@ -319,76 +328,79 @@ int main()
 	STRNSTR("", "42tokyo", 7);
 	STRNSTR("", "42tokyo", 0);
 
-	puts("");
-	puts("Part 2 - Additional functions");
-	puts("-----------------------");
+	PART("Part 2 - Additional functions");
 
 	title = "strjoin";
 	TITLE;
-	STRJOIN("42", "Tokyo");
-	STRJOIN("42Tokyo", "-tjinichi");
-	STRJOIN("", "");
-	STRJOIN("", "42");
-	STRJOIN("42", "");
+	check_flag += STRJOIN("42", "Tokyo");
+	check_flag += STRJOIN("42Tokyo", "-tjinichi");
+	check_flag += STRJOIN("", "");
+	check_flag += STRJOIN("", "42");
+	check_flag += STRJOIN("42", "");
+	yes_or_no(check_flag, title);
 
 	puts("");
 	title = "split";
 	TITLE;
-	SPLIT("42 Tokyo", ' ');
-	SPLIT("42Tokyo", ' ');
-	SPLIT("       ", ' ');
-	SPLIT("42Tokyo", '\0');
-	SPLIT("42  Tokyo", '\0');
-	SPLIT("42\0Tokyo", '\0');
-	SPLIT("42\200Tokyo", '\0');
-	SPLIT("42\0Tokyo", '\200');
-	SPLIT("", 'a');
-	SPLIT("", '\0');
-	SPLIT("", '\200');
+	check_flag += SPLIT("42 Tokyo", ' ');
+	check_flag += SPLIT("42Tokyo", ' ');
+	check_flag += SPLIT("       ", ' ');
+	check_flag += SPLIT("42Tokyo", '\0');
+	check_flag += SPLIT("42  Tokyo", '\0');
+	check_flag += SPLIT("42\0Tokyo", '\0');
+	check_flag += SPLIT("42\200Tokyo", '\0');
+	check_flag += SPLIT("42\0Tokyo", '\200');
+	check_flag += SPLIT("", 'a');
+	check_flag += SPLIT("", '\0');
+	check_flag += SPLIT("", '\200');
+	yes_or_no(check_flag, title);
 
 	puts("");
 	title = "itoa";
 	TITLE;
-	ITOA((long long)0, "0");
-	ITOA((long long)0000, "0");
-	ITOA((long long)+-+-+-1, "-1");
-	ITOA((long long)+-+-1, "1");
-	ITOA((long long)-123, "-123");
-	ITOA((long long)+123, "123");
-	ITOA((long long)INT_MIN, "-2147483648");
-	ITOA((long long)INT_MAX, "2147483647");
-	ITOA((long long)INT_MAX + 1, "-2147483648");
-	ITOA((long long)INT_MIN - 1, "2147483647");
+	check_flag += ITOA((long long)0, "0");
+	check_flag += ITOA((long long)0000, "0");
+	check_flag += ITOA((long long)+-+-+-1, "-1");
+	check_flag += ITOA((long long)+-+-1, "1");
+	check_flag += ITOA((long long)-123, "-123");
+	check_flag += ITOA((long long)+123, "123");
+	check_flag += ITOA((long long)INT_MIN, "-2147483648");
+	check_flag += ITOA((long long)INT_MAX, "2147483647");
+	check_flag += ITOA((long long)INT_MAX + 1, "-2147483648");
+	check_flag += ITOA((long long)INT_MIN - 1, "2147483647");
+	yes_or_no(check_flag, title);
 
 	puts("");
 	title = "substr";
 	TITLE;
-	SUBSTR("abcde", 0, (size_t)3, "abc");
-	SUBSTR("abcde", 2, (size_t)3, "cde");
-	SUBSTR("abcde", 0, (size_t)10, "abcde");
-	SUBSTR("abcde", 10, (size_t)10, "");
-	SUBSTR("abcde", 5, (size_t)10, "");
-	// SUBSTR("abcde", 5, (size_t)9223372036854775807, "");
+	check_flag += SUBSTR("abcde", 0, (size_t)3, "abc");
+	check_flag += SUBSTR("abcde", 2, (size_t)3, "cde");
+	check_flag += SUBSTR("abcde", 0, (size_t)10, "abcde");
+	check_flag += SUBSTR("abcde", 10, (size_t)10, "");
+	check_flag += SUBSTR("abcde", 5, (size_t)10, "");
+	check_flag += SUBSTR("abcde", 5, (size_t)9223372036854775807, "");
+	yes_or_no(check_flag, title);
 
 	puts("");
 	title = "strtrim";
 	TITLE;
-	STRTRIM("  42Tokyo  ", " ", "42Tokyo");
-	STRTRIM(" 11 42Tokyo 11 ", " 1", "42Tokyo");
-	STRTRIM("1142Tokyo42", "1", "42Tokyo42");
-	STRTRIM("111111111", "1", "");
-	STRTRIM("42Tokyo", "1", "42Tokyo");
-	STRTRIM("42Tokyo", "42Tokyo", "");
+	check_flag += STRTRIM("  42Tokyo  ", " ", "42Tokyo");
+	check_flag += STRTRIM(" 11 42Tokyo 11 ", " 1", "42Tokyo");
+	check_flag += STRTRIM("1142Tokyo42", "1", "42Tokyo42");
+	check_flag += STRTRIM("111111111", "1", "");
+	check_flag += STRTRIM("42Tokyo", "1", "42Tokyo");
+	check_flag += STRTRIM("42Tokyo", "42Tokyo", "");
+	yes_or_no(check_flag, title);
 
 	puts("");
 	title = "strmapi";
 	TITLE;
-	STRMAPI("abcde", (void*)strmapi_f, "ABCDE");
-	STRMAPI("ABCDE", (void*)strmapi_f, "abcde");
-	STRMAPI("", (void*)strmapi_f, "");
+	check_flag += STRMAPI("abcde", (void*)strmapi_f, "ABCDE");
+	check_flag += STRMAPI("ABCDE", (void*)strmapi_f, "abcde");
+	check_flag += STRMAPI("", (void*)strmapi_f, "");
+	yes_or_no(check_flag, title);
 
-	puts("Part 3 - Bonus functions");
-	puts("-----------------------");
+	PART("Part 3 - Bonus functions");
 
 	title = "lstnew";
 	TITLE;

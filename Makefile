@@ -6,7 +6,7 @@
 #    By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 16:58:01 by tjinichi          #+#    #+#              #
-#    Updated: 2020/11/06 01:04:46 by tjinichi         ###   ########.fr        #
+#    Updated: 2020/11/07 14:41:51 by tjinichi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CC = gcc
 CFLAGS = -g -I$(LIBFTDIR)
 
 SRCS :=	$(wildcard ./*.c) \
-		$(wildcard ./srcs/Bonus_functions/*.c)
+		$(wildcard ./srcs/Bonus_functions/*.c) \
+		$(wildcard ./srcs/Part2_functions/*.c) \
 		# srcs/Bonus_functions/lstnew_test.c
 
 

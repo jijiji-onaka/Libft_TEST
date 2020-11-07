@@ -6,7 +6,7 @@
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 03:56:55 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/06 02:32:04 by tjinichi         ###   ########.fr       */
+/*   Updated: 2020/11/07 17:27:12 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <limits.h>
 # include <ctype.h>
 # include "libft.h"
-char			**split(char const *s, char c);
+char			**_split(char const *s, char c);
 t_list			*_lstnew(void *content);
 int				_lstsize(t_list *lst);
 t_list			*_lstlast(t_list *lst);
@@ -29,6 +29,13 @@ void			_lstclear(t_list **lst, void (*del)(void*));
 int				LSTNEW(char *s);
 int				LSTSIZE(int size);
 int				LSTLAST(void);
+int				STRMAPI(char *before, char (*f)(unsigned int i, \
+				char c), char *after);
+int				STRTRIM(char *str, char *set, char *ans);
+int				SUBSTR(char *str, int start, size_t end, char *ans);
+int				ITOA(long long a, char *b);
+int				SPLIT(char *s, char c);
+int				STRJOIN(char *a, char *b);
 
 // mallco error 9223372036854775807
 
@@ -65,7 +72,7 @@ int				LSTLAST(void);
 
 # define OK puts("OK")
 # define NO puts("NO")
-# define P puts("-----------------------");
+# define P printf("\x1b[36m----------------------------\033[m\n");
 # define MAX(x, y) ((x) > (y) ? (x) : (y))
 # define MIN(x, y) ((x) < (y) ? (x) : (y))
 
@@ -275,65 +282,40 @@ int				LSTLAST(void);
 	PSY(s); PSL(p);}\
 	})
 
-# define STRJOIN(a, b) ( {\
-	int f = 0; \
-	char *s1 = ft_strjoin(a, b); \
-	size_t a_len = strlen(a); size_t b_len = strlen(b); \
-	size_t len = a_len + b_len + 1; \
-	char *s2 = malloc(len); \
-	strlcpy(s2, a, len); strlcat(s2, b, len); \
-	if (strcmp(s1, s2) != 0) f++; \
-	if (s1[a_len+b_len] != s2[a_len+b_len]) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\", \"%s\"]\n", a, b); \
-	PSY(s1); PSL(s2);}\
-	free(s1); free(s2);})
+// # define STRJOIN(a, b) ( {\
+// 	int f = 0; \
+// 	char *s1 = ft_strjoin(a, b); \
+// 	size_t a_len = strlen(a); size_t b_len = strlen(b); \
+// 	size_t len = a_len + b_len + 1; \
+// 	char *s2 = malloc(len); \
+// 	strlcpy(s2, a, len); strlcat(s2, b, len); \
+// 	if (strcmp(s1, s2) != 0) f++; \
+// 	if (s1[a_len+b_len] != s2[a_len+b_len]) f++; \
+// 	if (f != 0) {NO ;printf("argument[\"%s\", \"%s\"]\n", a, b); \
+// 	PSY(s1); PSL(s2);}\
+// 	free(s1); free(s2);})
 
-# define ITOA(j, b) ( {\
-	long long a = (long long)j; \
-	char *s = ft_itoa(a); int f = 0; size_t len = strlen(b);\
-	if (strcmp(s, b) != 0) f++;\
-	if (s[len] != b[len]) f++; \
-	if (f != 0) {NO ;printf("argument[%lld]\n", a); \
-	PSY(s); printf("mine  = %s\n", b); P }\
-	free(s); })
 
-# define SPLIT(a, b)({ \
-	char **p = ft_split(a, b); int k = 0; \
-	char **s = split(a, b); int f = 0;\
-	if (!p) {puts("return value : NULL");} \
-	else {while (p[k]){ if (strcmp(s[k], p[k]) != 0){ free(p[k]); free(s[k]); f++; break ;} free(p[k]); free(s[k]); k++;} \
-	if (s[k] != p[k]) f++; \
-	if (f != 0) {NO; printf("argument[\"%s\", \'%c\']\n", a, b); \
-	PSY(p[k]); printf("mine  = %s\n", s[k]); P }} \
-	free(p); free(s);})
 
-# define SUBSTR(a, b, c, d) ({ \
-	char *s = ft_substr(a, b, c); \
-	size_t len = strlen(d); \
-	if (strcmp(s, d) != 0) {NO; printf("argument[\"%s\", %d, %zu]\n", a, b, c); \
-	PSY(s); printf("mine  = %s\n", d); P } \
-	else if (s[len] != d[len]) {NO; printf("argument[\"%s\", %d, %zu]\n", a, b, c); \
-	PSY(s); printf("mine  = %s\n", d); P } \
-	free(s);})
 
-# define STRTRIM(a, b, c) ({ \
-	char *s = ft_strtrim(a, b); \
-	size_t len = strlen(c); \
-	if (strcmp(s, c) != 0){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
-	PSY(s); printf("mine  = %s\n", c); P } \
-	else if (s[len] != c[len]){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
-	PSY(s); printf("mine  = %s\n", c); P } \
-	free(s);})
+// # define STRTRIM(a, b, c) ({ \
+	// char *s = ft_strtrim(a, b); \
+	// size_t len = strlen(c); \
+	// if (strcmp(s, c) != 0){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
+	// PSY(s); printf("mine  = %s\n", c); P } \
+	// else if (s[len] != c[len]){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
+	// PSY(s); printf("mine  = %s\n", c); P } \
+	// free(s);})
 
 char			strmapi_f(unsigned int i, char c);
-# define STRMAPI(a, b, c) ({ \
-	char *s = ft_strmapi(a, b); \
-	size_t len = strlen(c); \
-	if (strcmp(s, c) != 0){NO; printf("argument[\"%s\", Pointer to a function to swap lowercase and uppercase letters]\n", a); \
-	PSY(s); printf("mine  = %s\n", c); P } \
-	else if (s[len] != c[len]){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
-	PSY(s); printf("mine  = %s\n", c); P } \
-	free(s);})
+// # define STRMAPI(a, b, c) ({ \
+// 	char *s = ft_strmapi(a, b); \
+// 	size_t len = strlen(c); \
+// 	if (strcmp(s, c) != 0){NO; printf("argument[\"%s\", Pointer to a function to swap lowercase and uppercase letters]\n", a); \
+// 	PSY(s); printf("mine  = %s\n", c); P } \
+// 	else if (s[len] != c[len]){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
+// 	PSY(s); printf("mine  = %s\n", c); P } \
+// 	free(s);})
 
 
 #endif
