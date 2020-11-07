@@ -1,12 +1,62 @@
 #include "libft.h"
 #include "test.h"
 
+static void		color_title(char *s, int *f)
+{
+	*f = 0;
+	printf("\x1b[1m");
+	printf("\x1b[4m");
+	printf("\x1b[33m");
+	printf("[%s]\n", s);
+	printf("\x1b[39m");
+	printf("\x1b[0m");
+	// printf("\n->");
+}
+
+static void		yes_or_no(int flag, char *s)
+{
+	if (flag > 0)
+	{
+		printf("\x1b[1m");
+		printf("\x1b[31m");
+		printf("%s", s);
+		printf("\x1b[39m");
+		printf("\x1b[0m");
+		//---------------------------
+		printf("\x1b[1m");
+		printf("\x1b[31m");
+		printf(" has a bug　↑\n");
+		printf("\x1b[39m");
+		printf("\x1b[0m");
+	}
+	else
+	{
+		printf("\x1b[1m");
+		printf("\x1b[32m");
+		printf("%s", s);
+		printf("\x1b[39m");
+		printf("\x1b[0m");
+		//---------------------------
+		printf("\x1b[32m");
+		printf(" is clear!\n");
+		printf("\x1b[39m");
+		printf("\x1b[0m");
+	}
+
+}
+
 int main()
 {
+	int		check_flag;
+	char	*title;
+
+	check_flag = 0;
+
 	puts("Part 1 - Libc functions");
 	puts("-----------------------");
 
-	puts("[atoi]");
+	title = "atoi";
+	TITLE;
 	ATOI("0");
 	ATOI("000");
 	ATOI("1000");
@@ -28,21 +78,25 @@ int main()
 	ATOI("-63410682753376583680");
 
 	puts("");
-	puts("[bzero]");
-	printf("%s", "char s[10] = \"abcdefg\";\n");
+	title = "bzero";
+	TITLE;
+	title = "char s[10] = \"abcdefg\";";
+	TITLE;
 	BZERO(1, 3);
 	BZERO(10, 5);
 	BZERO(10, 9);
 	BZERO(5, 5);
 
 	puts("");
-	puts("[calloc]");
+	title = "calloc";
+	TITLE;
 	CALLOC(2, 1);
 	CALLOC(0, 6);
 	CALLOC(0, 0);
 
 	puts("");
-	puts("[isalnum]");
+	title = "isalnum";
+	TITLE;
 	ALNUM(47);
 	ALNUM(48);
 	ALNUM(53);
@@ -62,7 +116,8 @@ int main()
 	ALNUM(1231);
 
 	puts("");
-	puts("[isalpha]");
+	title = "isalpha";
+	TITLE;
 	ALPHA(64);
 	ALPHA(65);
 	ALPHA(80);
@@ -75,7 +130,8 @@ int main()
 	ALPHA(123);
 
 	puts("");
-	puts("[isascii]");
+	title = "isascii";
+	TITLE;
 	ASCII(-1);
 	ASCII(0);
 	ASCII(65);
@@ -83,7 +139,8 @@ int main()
 	ASCII(128);
 
 	puts("");
-	puts("[isdigit]");
+	title = "isdigit";
+	TITLE;
 	DIGIT(47);
 	DIGIT(48);
 	DIGIT(54);
@@ -91,7 +148,8 @@ int main()
 	DIGIT(58);
 
 	puts("");
-	puts("[isprint]");
+	title = "isprint";
+	TITLE;
 	PRINT(31);
 	PRINT(32);
 	PRINT(68);
@@ -99,7 +157,8 @@ int main()
 	PRINT(127);
 
 	puts("");
-	puts("[toupper]");
+	title = "toupper";
+	TITLE;
 	UPPER(96);
 	UPPER(97);
 	UPPER(100);
@@ -107,7 +166,8 @@ int main()
 	UPPER(123);
 
 	puts("");
-	puts("[tolower]");
+	title = "tolower";
+	TITLE;
 	LOWER(64);
 	LOWER(65);
 	LOWER(80);
@@ -116,7 +176,8 @@ int main()
 
 //mem系はNULLの確認を別途する
 	puts("");
-	puts("[memccpy]");
+	title = "memccpy";
+	TITLE;
 	MEMCCPY("abcde", "def", 'f', (size_t)4);
 	MEMCCPY("abcde", "def", 'f', (size_t)1);
 	MEMCCPY("abcde", "def", 'f', (size_t)100);
@@ -126,7 +187,8 @@ int main()
 	MEMCCPY("aaaaa", "bbb", '\0', (size_t)3);
 
 	puts("");
-	puts("[memchr]");
+	title = "memchr";
+	TITLE;
 	MEMCHR("ABCDE", 'C', (size_t)5);
 	MEMCHR("ABCDE", 'C', (size_t)100);
 	MEMCHR("ABCDE", 'a', (size_t)4);
@@ -136,7 +198,8 @@ int main()
 	MEMCHR("ABCDE", '\0', (size_t)5);
 
 	puts("");
-	puts("[memcmp]");
+	title = "memcmp";
+	TITLE;
 	MEMCMP("abc", "abc", (size_t)4);
 	MEMCMP("abc", "xyz", (size_t)4);
 	MEMCMP("abc", "abcde", (size_t)4);
@@ -145,14 +208,16 @@ int main()
 	MEMCMP("abcde", "abcde", (size_t)5);
 
 	puts("");
-	puts("[memcpy]");
+	title = "memcpy";
+	TITLE;
 	MEMCPY("abcde", "xyz", (size_t)4);
 	MEMCPY("", "xyz", (size_t)0);
 	MEMCPY("xyz", "", (size_t)1);
 	MEMCPY("", "", (size_t)1);
 
 	puts("");
-	puts("[memmove]");
+	title = "memmove";
+	TITLE;
 	MEMMOVE1("abcde", "xyz", 4);
 	MEMMOVE1("abc", "xyzvw", 3);
 	MEMMOVE1("abc", "abc", 4);
@@ -170,7 +235,8 @@ int main()
 	MEMMOVE3("abcdefg", 3, 3);
 
 	puts("");
-	puts("[memset]");
+	title = "memset";
+	TITLE;
 	MEMSET("aaaaaaaa", 'b', 6);
 	MEMSET("aaaaaaaa", 'b', 0);
 	MEMSET("aaaaaaaa", '\200', 6);
@@ -178,7 +244,8 @@ int main()
 	MEMSET("aaaaaaaa", '\n', 6);
 
 	puts("");
-	puts("[strchr]");
+	title = "strchr";
+	TITLE;
 	STRCHR("hello world", ' ');
 	STRCHR("hello world", '\0');
 	STRCHR("hello world", 'l');
@@ -186,17 +253,20 @@ int main()
 	STRCHR("", 'a');
 
 	puts("");
-	puts("[strdup]");
+	title = "strdup";
+	TITLE;
 	STRDUP("42Tokyo");
 	STRDUP("");
 
 	puts("");
-	puts("[strlen]");
+	title = "strlen";
+	TITLE;
 	STRLEN("42Tokyo");
 	STRLEN("");
 
 	puts("");
-	puts("[strlcat]");
+	title = "strlcat";
+	TITLE;
 	STRLCAT("42", "tokyo", 5);
 	STRLCAT("42Tokyo", "Roppongi", 7);
 	STRLCAT("42Tokyo", "Roppongi", 9);
@@ -204,7 +274,8 @@ int main()
 	STRLCAT("42Tokyo", "nop", 0);
 
 	puts("");
-	puts("[strlcpy]");
+	title = "strlcpy";
+	TITLE;
 	STRLCPY("abcde", "Tokyo", 5);
 	STRLCPY("abcde", "Tokyo", 6);
 	STRLCPY("abcde", "Tokyo", 0);
@@ -215,7 +286,8 @@ int main()
 	STRLCPY("abcde", "42Tokyo", 1);
 
 	puts("");
-	puts("[strncmp]");
+	title = "strncmp";
+	TITLE;
 	STRNCMP("abc", "abc", 4);
 	STRNCMP("abc", "abcd", 5);
 	STRNCMP("abce", "abc", 4);
@@ -223,7 +295,8 @@ int main()
 	STRNCMP("abce", "abc", 0);
 
 	puts("");
-	puts("[strrchr]");
+	title = "strrchr";
+	TITLE;
 	STRRCHR("42Tokyo", 'T');
 	STRRCHR("42TokyoTo", 'T');
 	STRRCHR("hello world", 'l');
@@ -231,7 +304,8 @@ int main()
 	STRRCHR("42Tokyo", '\0');
 
 	puts("");
-	puts("[strnstr]");
+	title = "strnstr";
+	TITLE;
 	STRNSTR("42Tokyo", "Tokyo", 0);
 	STRNSTR("42Tokyo", "Tokyo", 5);
 	STRNSTR("42Tokyo", "42Tokyo", 7);
@@ -249,7 +323,8 @@ int main()
 	puts("Part 2 - Additional functions");
 	puts("-----------------------");
 
-	puts("[strjoin]");
+	title = "strjoin";
+	TITLE;
 	STRJOIN("42", "Tokyo");
 	STRJOIN("42Tokyo", "-tjinichi");
 	STRJOIN("", "");
@@ -257,7 +332,8 @@ int main()
 	STRJOIN("42", "");
 
 	puts("");
-	puts("[split]");
+	title = "split";
+	TITLE;
 	SPLIT("42 Tokyo", ' ');
 	SPLIT("42Tokyo", ' ');
 	SPLIT("       ", ' ');
@@ -271,7 +347,8 @@ int main()
 	SPLIT("", '\200');
 
 	puts("");
-	puts("[itoa]");
+	title = "itoa";
+	TITLE;
 	ITOA((long long)0, "0");
 	ITOA((long long)0000, "0");
 	ITOA((long long)+-+-+-1, "-1");
@@ -284,16 +361,18 @@ int main()
 	ITOA((long long)INT_MIN - 1, "2147483647");
 
 	puts("");
-	puts("[substr]");
+	title = "substr";
+	TITLE;
 	SUBSTR("abcde", 0, (size_t)3, "abc");
 	SUBSTR("abcde", 2, (size_t)3, "cde");
 	SUBSTR("abcde", 0, (size_t)10, "abcde");
 	SUBSTR("abcde", 10, (size_t)10, "");
 	SUBSTR("abcde", 5, (size_t)10, "");
-	SUBSTR("abcde", 5, (size_t)9223372036854775807, "");
+	// SUBSTR("abcde", 5, (size_t)9223372036854775807, "");
 
 	puts("");
-	puts("[strtrim]");
+	title = "strtrim";
+	TITLE;
 	STRTRIM("  42Tokyo  ", " ", "42Tokyo");
 	STRTRIM(" 11 42Tokyo 11 ", " 1", "42Tokyo");
 	STRTRIM("1142Tokyo42", "1", "42Tokyo42");
@@ -302,8 +381,30 @@ int main()
 	STRTRIM("42Tokyo", "42Tokyo", "");
 
 	puts("");
-	puts("[strmapi]");
+	title = "strmapi";
+	TITLE;
 	STRMAPI("abcde", (void*)strmapi_f, "ABCDE");
 	STRMAPI("ABCDE", (void*)strmapi_f, "abcde");
 	STRMAPI("", (void*)strmapi_f, "");
+
+	puts("Part 3 - Bonus functions");
+	puts("-----------------------");
+
+	title = "lstnew";
+	TITLE;
+	check_flag += LSTNEW("42Tokyo");
+	yes_or_no(check_flag, title);
+
+	title = "lstsize";
+	TITLE;
+	check_flag += LSTSIZE(2);
+	check_flag += LSTSIZE(0);
+	check_flag += LSTSIZE(10);
+	yes_or_no(check_flag, title);
+
+	title = "lstlast";
+	TITLE;
+	check_flag += LSTLAST();
+	yes_or_no(check_flag, title);
+
 }

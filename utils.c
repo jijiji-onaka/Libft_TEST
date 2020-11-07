@@ -1,4 +1,5 @@
 #include "test.h"
+#include "libft.h"
 
 static void		*two_dimensional_free(char ***res, int cur)
 {
@@ -89,4 +90,80 @@ char			strmapi_f(unsigned int i, char c)
 {
 	c ^= 32;
 	return (c);
+}
+
+t_list	*_lstnew(void *content)
+{
+	t_list	*new_element;
+
+	if (!(new_element = malloc(sizeof(t_list))))
+		return (NULL);
+	new_element->content = content;
+	new_element->next = NULL;
+	return (new_element);
+}
+
+int				_lstsize(t_list *lst)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (lst)
+	{
+		cnt++;
+		lst = lst->next;
+	}
+	return (cnt);
+}
+
+t_list	*_lstlast(t_list *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next)
+	{
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+void	_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last_elem;
+
+	if (new == NULL || lst == NULL)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	last_elem = _lstlast(*lst);
+	last_elem->next = new;
+}
+
+void	_lstdelone(t_list *lst, void (*del)(void*))
+{
+	if (lst == NULL || del == NULL)
+		return ;
+	del(lst->content);
+	lst->content = NULL;
+	lst->next = NULL;
+	free(lst);
+}
+
+void	_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list	*tmp;
+
+	if (lst == NULL || del == NULL)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		_lstdelone(*lst, del);
+		*lst = NULL;
+		*lst = tmp;
+	}
+	*lst = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 03:56:55 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/03 17:11:29 by tjinichi         ###   ########.fr       */
+/*   Updated: 2020/11/06 02:32:04 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,21 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <ctype.h>
+# include "libft.h"
 char			**split(char const *s, char c);
+t_list			*_lstnew(void *content);
+int				_lstsize(t_list *lst);
+t_list			*_lstlast(t_list *lst);
+void			_lstadd_back(t_list **lst, t_list *new);
+void			_lstdelone(t_list *lst, void (*del)(void*));
+void			_lstclear(t_list **lst, void (*del)(void*));
+int				LSTNEW(char *s);
+int				LSTSIZE(int size);
+int				LSTLAST(void);
 
 // mallco error 9223372036854775807
+
+# define TITLE color_title(title, &check_flag);
 
 # define RPP(a) (printf("real = %p\n", a))
 # define FPP(a) (printf("ft = %p\n", a))
@@ -59,7 +71,7 @@ char			**split(char const *s, char c);
 
 # define ATOI(a) ({ \
 	int i = ft_atoi(a);int j = atoi(a); \
-	if (i == j) ; else{PS(a); NO; PDY(i); PDL(j);P}})
+	if (i == j) ; else{PS(a); NO; PDY(i); PDL(j); P}})
 
 # define BZERO(a, b) ( {\
 	char s[10] = "abcdefg";char c[10] = "abcdefg"; \
@@ -322,5 +334,6 @@ char			strmapi_f(unsigned int i, char c);
 	else if (s[len] != c[len]){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
 	PSY(s); printf("mine  = %s\n", c); P } \
 	free(s);})
+
 
 #endif

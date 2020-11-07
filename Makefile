@@ -6,18 +6,20 @@
 #    By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 16:58:01 by tjinichi          #+#    #+#              #
-#    Updated: 2020/11/03 17:09:56 by tjinichi         ###   ########.fr        #
+#    Updated: 2020/11/06 01:04:46 by tjinichi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LIBFTDIR	=	../libft
+LIBFTDIR	=	../libft/
 
 NAME = test
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -I$(LIBFTDIR)
 
-SRCS =	main.c \
-		utils.c \
+SRCS :=	$(wildcard ./*.c) \
+		$(wildcard ./srcs/Bonus_functions/*.c)
+		# srcs/Bonus_functions/lstnew_test.c
+
 
 OBJS = $(SRCS:.c=.o)
 
@@ -29,7 +31,7 @@ $(NAME): $(LIBS) $(OBJS)
 	$(CC) $(CFLAGS) -fsanitize=address -o $(NAME) $(OBJS) $(LIBS)
 
 $(LIBS): FORCE
-	make -C $(LIBFTDIR)
+	make bonus -C $(LIBFTDIR)
 
 FORCE:
 
