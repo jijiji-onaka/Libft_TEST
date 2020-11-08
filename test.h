@@ -6,7 +6,7 @@
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 03:56:55 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/07 17:27:12 by tjinichi         ###   ########.fr       */
+/*   Updated: 2020/11/08 17:31:38 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int				SUBSTR(char *str, int start, size_t end, char *ans);
 int				ITOA(long long a, char *b);
 int				SPLIT(char *s, char c);
 int				STRJOIN(char *a, char *b);
+int				STRNSTR(char *a, char *b, size_t c);
 
 // mallco error 9223372036854775807
 
@@ -234,88 +235,13 @@ int				STRJOIN(char *a, char *b);
 	if (i == j) ; else {{NO; printf("argument[\"%s\"]\n", a); \
 	PSTY(i); PSTL(j);}}1;})
 
-# define STRLCAT(a, b, c) ( { \
-	char *s = calloc(11, sizeof(char)); char *p = calloc(11, sizeof(char)); \
-	strlcpy(s, a, strlen(a) + 1); strlcpy(p, a, strlen(a) + 1);\
-	size_t i = ft_strlcat(s, b, c); size_t j = strlcat(p, b, c); \
-	int f = 0; \
-	if (i != j) f++; \
-	if (strcmp(s, p) != 0) f++; \
-	if (s[strlen(s)] != p[strlen(p)]) f++;\
-	if (f != 0) {NO; printf("argument[\"%s\", \"%s\", %d]\n", a, b, c); \
-	PSY(s); PSTY(i); PSL(p); PSTL(j); P } \
-	free(s);free(p);})
+int			STRLCAT(char *a, char *b, size_t c);
+int			STRLCPY(char *a, char *b, size_t c);
+int			STRNCMP(char *a, char *b, int c);
+int			STRRCHR(char *a, char b);
+int			sign_check(int i);
+char		strmapi_f(unsigned int i, char c);
 
-# define STRLCPY(a, b, c) ( { \
-	char *s = calloc(11, sizeof(char)); char *p = calloc(11, sizeof(char)); \
-	strlcpy(s, a, strlen(a) + 1); strlcpy(p, a, strlen(a) + 1);\
-	size_t i = ft_strlcpy(s, b, c); size_t j = strlcpy(p, b, c); \
-	int f = 0; \
-	if (i != j) f++; \
-	if (strcmp(s, p) != 0) f++; \
-	if (s[strlen(s)] != p[strlen(p)]) f++; \
-	if (f != 0) {NO; printf("argument[\"%s\", \"%s\", %d]\n", a, b, c); \
-	PSY(s); PSTY(i); PSL(p); PSTL(j); P } \
-	free(s);free(p);})
-
-# define STRNCMP(a, b, c) ({ \
-	int i = ft_strncmp(a, b, c); int j = strncmp(a, b, c); \
-	if (i != j) {NO; printf("argument[\"%s\", \"%s\", %d]\n", a, b, c); \
-	PDY(i); PDL(j); P } \
-	})
-
-# define STRRCHR(a, b) ( {\
-	int f = 0; \
-	char *s1 = ft_strrchr(a, b); \
-	char *s2 = strrchr(a, b); \
-	if (!s1 || !s2) {if (!s1 && !s2) ; else {printf("argument[\"%s\", \'%c\']\n", a, b);} }\
-	else {if (*s1 != *s2) f++; \
-	if (strcmp(s1, s2) != 0) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\", \'%c\']\n", a, b); \
-	PSY(s1); PSL(s2);}}})
-
-# define STRNSTR(a, b, c) ({ \
-	char *s = ft_strnstr(a, b, c); char *p = strnstr(a, b, c); \
-	if (!s || !p) {if (!s && !p) ; else {NO ;printf("argument[\"%s\", \"%s\", \'%d\']\n", a, b, c); \
-	PSY(s); PSL(p);}}\
-	else if (strcmp(s, p) != 0){NO ;printf("argument[\"%s\", \"%s\", \'%d\']\n", a, b, c); \
-	PSY(s); PSL(p);}\
-	})
-
-// # define STRJOIN(a, b) ( {\
-// 	int f = 0; \
-// 	char *s1 = ft_strjoin(a, b); \
-// 	size_t a_len = strlen(a); size_t b_len = strlen(b); \
-// 	size_t len = a_len + b_len + 1; \
-// 	char *s2 = malloc(len); \
-// 	strlcpy(s2, a, len); strlcat(s2, b, len); \
-// 	if (strcmp(s1, s2) != 0) f++; \
-// 	if (s1[a_len+b_len] != s2[a_len+b_len]) f++; \
-// 	if (f != 0) {NO ;printf("argument[\"%s\", \"%s\"]\n", a, b); \
-// 	PSY(s1); PSL(s2);}\
-// 	free(s1); free(s2);})
-
-
-
-
-// # define STRTRIM(a, b, c) ({ \
-	// char *s = ft_strtrim(a, b); \
-	// size_t len = strlen(c); \
-	// if (strcmp(s, c) != 0){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
-	// PSY(s); printf("mine  = %s\n", c); P } \
-	// else if (s[len] != c[len]){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
-	// PSY(s); printf("mine  = %s\n", c); P } \
-	// free(s);})
-
-char			strmapi_f(unsigned int i, char c);
-// # define STRMAPI(a, b, c) ({ \
-// 	char *s = ft_strmapi(a, b); \
-// 	size_t len = strlen(c); \
-// 	if (strcmp(s, c) != 0){NO; printf("argument[\"%s\", Pointer to a function to swap lowercase and uppercase letters]\n", a); \
-// 	PSY(s); printf("mine  = %s\n", c); P } \
-// 	else if (s[len] != c[len]){NO; printf("argument[\"%s\", \"%s\"]\n", a, b); \
-// 	PSY(s); printf("mine  = %s\n", c); P } \
-// 	free(s);})
 
 
 #endif

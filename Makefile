@@ -6,7 +6,7 @@
 #    By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/03 16:58:01 by tjinichi          #+#    #+#              #
-#    Updated: 2020/11/07 14:41:51 by tjinichi         ###   ########.fr        #
+#    Updated: 2020/11/08 17:34:22 by tjinichi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,14 @@ CC = gcc
 CFLAGS = -g -I$(LIBFTDIR)
 
 SRCS :=	$(wildcard ./*.c) \
-		$(wildcard ./srcs/Bonus_functions/*.c) \
 		$(wildcard ./srcs/Part2_functions/*.c) \
-		# srcs/Bonus_functions/lstnew_test.c
+		$(wildcard ./srcs/Part1_functions/*.c)
+
+B_SRCS :=$(wildcard ./srcs/Bonus_functions/*.c)
 
 
 OBJS = $(SRCS:.c=.o)
+B_OBJS = $(B_SRCS:.c=.o)
 
 LIBS = 	$(LIBFTDIR)/libft.a
 
@@ -45,6 +47,9 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+bonus: $(LIBS) $(OBJS) $(B_OBJS)
+	$(CC) $(CFLAGS) -fsanitize=address -o $(NAME) $(OBJS) $(LIBS) $(B_OBJS)
 
 leak:
 	ASAN_OPTIONS=detect_leaks=1 ./test

@@ -167,3 +167,13 @@ void	_lstclear(t_list **lst, void (*del)(void*))
 	}
 	*lst = NULL;
 }
+
+int		sign_check(int i)
+{
+	if (i > 0)
+		return (1);
+	else if (i == 0)
+		return (0);
+	else
+		return (-1);
+}
