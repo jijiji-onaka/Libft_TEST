@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp_test.c                                     :+:      :+:    :+:   */
+/*   strchr_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:24:18 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:36 by tjinichi         ###   ########.fr       */
+/*   Created: 2020/11/08 17:45:48 by tjinichi          #+#    #+#             */
+/*   Updated: 2020/11/08 17:47:43 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 #include "libft.h"
 
-int			STRNCMP(char *a, char *b, int c)
+int		STRCHR(char *a, char b)
 {
-	int i = ft_strncmp(a, b, c);
-	int j = strncmp(a, b, c);
-	if (sign_check(i) != sign_check(j))
+	int f = 0;
+	char *s1 = ft_strchr(a, b);
+	char *s2 = strchr(a, b);
+	if (!s1 || !s2)
 	{
-		printf("argument[\"%s\", \"%s\", %d]\n", a, b, c);
-		PDY(i);
-		PDL(j);
-		P
-		return (1);
+		if (s1 != s2)
+			f = 1;
 	}
-	return (0);
+	else
+	{
+		if (*s1 != *s2)
+			f = 1;
+		if (strcmp(s1, s2) != 0)
+			f = 1;
+	}
+	if (f != 0)
+	{
+		printf("argument[\"%s\", \'%c\']\n", a, b);
+		PSY(s1);
+		PSL(s2);
+		P;
+	}
+	return (f);
 }

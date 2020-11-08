@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp_test.c                                     :+:      :+:    :+:   */
+/*   bzero_test.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:24:18 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:36 by tjinichi         ###   ########.fr       */
+/*   Created: 2020/11/08 19:19:56 by tjinichi          #+#    #+#             */
+/*   Updated: 2020/11/08 19:27:21 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 #include "libft.h"
 
-int			STRNCMP(char *a, char *b, int c)
+int		BZERO(size_t a, size_t b)
 {
-	int i = ft_strncmp(a, b, c);
-	int j = strncmp(a, b, c);
-	if (sign_check(i) != sign_check(j))
+	char s[10] = "abcdefg";
+	char c[10] = "abcdefg";
+	ft_bzero(s, a);
+	bzero(c, a);
+	if (c[b] != s[b])
 	{
-		printf("argument[\"%s\", \"%s\", %d]\n", a, b, c);
-		PDY(i);
-		PDL(j);
-		P
+		printf("argument[s, %d] -> compare : s[%d]\n", a, b);
+		P;
 		return (1);
 	}
 	return (0);

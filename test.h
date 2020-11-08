@@ -6,7 +6,7 @@
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 03:56:55 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 17:31:38 by tjinichi         ###   ########.fr       */
+/*   Updated: 2020/11/08 19:47:37 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,164 +77,37 @@ int				STRNSTR(char *a, char *b, size_t c);
 # define MAX(x, y) ((x) > (y) ? (x) : (y))
 # define MIN(x, y) ((x) < (y) ? (x) : (y))
 
-# define ATOI(a) ({ \
-	int i = ft_atoi(a);int j = atoi(a); \
-	if (i == j) ; else{PS(a); NO; PDY(i); PDL(j); P}})
 
-# define BZERO(a, b) ( {\
-	char s[10] = "abcdefg";char c[10] = "abcdefg"; \
-	ft_bzero(s, a); bzero(c, a); \
-	if (c[b] == s[b]) ; else{ \
-	printf("argument[s, %d] -> compare : s[%d]\n", a, b); NO; P}})
+int		ATOI(char *a);
+int		BZERO(size_t a, size_t b);
 
-# define CALLOC(a, b) ({ \
-	char *p = ft_calloc(a, b); char *s = calloc(a, b); \
-	if (s[MAX(0, a - 1)] == p[MAX(0, a - 1)]) ; else{ NO;} free(s);free(p);})
+int		CALLOC(size_t a, size_t b);
 
-# define ALNUM(a) ( {\
-	int i = ft_isalnum(a); int j = isalnum(a); \
-	if ((i > 0 && j > 0) || (i == 0 && j == 0)) ; \
-	else {PD(a);NO; PDY(i); PDL(j); P} })
+int		ALNUM(int a);
+int		ALPHA(int a);
 
-# define ALPHA(a) ( { \
-	int i = ft_isalpha(a); int j = isalpha(a); \
-	if ((i > 0 && j > 0) || (i == 0 && j == 0)) ; \
-	else {PD(a);NO; PDY(i); PDL(j); P} })
+int		ASCII(int a);
 
-# define ASCII(a) ( {\
-	int i = ft_isascii(a); int j = isascii(a); \
-	if ((i > 0 && j > 0) || (i == 0 && j == 0)) ; \
-	else {PD(a);NO; PDY(i); PDL(j); P} })
+int		DIGIT(int a);
 
-# define DIGIT(a) ( {\
-	int i = ft_isdigit(a); int j = isdigit(a); \
-	if ((i > 0 && j > 0) || (i == 0 && j == 0)) ; \
-	else {PD(a);NO; PDY(i); PDL(j); P} })
+int		PRINT(int a);
 
-# define PRINT(a) ( {\
-	int i = ft_isprint(a); int j = isprint(a); \
-	if ((i > 0 && j > 0) || (i == 0 && j == 0)) ; \
-	else {PD(a);NO; PDY(i); PDL(j); P} })
+int		UPPER(int a);
+int		LOWER(int a);
+int		MEMCCPY(char *a, char *b, char c, size_t d);
+int		MEMCHR(char *a, char b, size_t c);
 
-# define UPPER(a) ( {\
-	char i = ft_toupper(a); char j = toupper(a); \
-	if (i == j) ;\
-	else {PC(a);NO; PCY(i); PCL(j); P} })
+int		MEMCMP(char *a, char *b, size_t c);
+int		MEMCPY(char *a, char *b, size_t c);
+int		MEMMOVE1(char *a, char *b, size_t c);
 
-# define LOWER(a) ( {\
-	char i = ft_tolower(a); char j = tolower(a); \
-	if (i == j) ; \
-	else {PC(a);NO; PCY(i); PCL(j); P} })
+int		MEMMOVE2(char *a, size_t b, size_t c);
+int		MEMMOVE3(char *a, size_t b, size_t c);
 
-# define MEMCCPY(a, b, c, d) ( {\
-	int f = 0; \
-	char *s = strdup(a); char *p = strdup(a); \
-	char *s1 = ft_memccpy(s, b, c, d); \
-	char *s2 = memccpy(p, b, c, d); \
-	if (!s1 || !s2){if (!s1 && !s2) ; else {printf("argument[\"%s\", \"%s\", %c, %zu]\n", a, b, c, d);}}\
-	else if (s1 && s2) { if (*s1 != *s2) f++; \
-	if (strcmp(s, p) != 0) f++; \
-	if (f != 0) {NO; printf("argument[\"%s\", \"%s\", %c, %zu]\n", a, b, c, d); \
-	}} free(s); free(p);})
-
-# define MEMCHR(a, b, c) ( {\
-	int f = 0; \
-	char *s = strdup(a); char *p = strdup(a); \
-	char *s1 = ft_memchr(s, b, c); \
-	char *s2 = memchr(p, b, c); \
-	if (!s1 || !s2) {if (!s1 && !s2) ; else {printf("argument[\"%s\", \'%c\', %zu]\n", a, b, c);} }\
-	else if (*s1 != *s2) {f++;\
-	if (f != 0) {printf("argument[\"%s\", \'%c\', %zu]\n", a, b, c);}} free(s); free(p); })
-
-# define MEMCMP(a, b, c) ( {\
-	int f = 0; \
-	char *s = strdup(a); char *p = strdup(b); \
-	int i = ft_memcmp(s, p, c); \
-	int j = memcmp(s, p, c); \
-	if (i != j) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\", \"%s\", %zu]\n", a, b, c);} \
-	free(s); free(p); })
-
-# define MEMCPY(a, b, c) ( {\
-	int f = 0; \
-	char *s = strdup(a); char *p = strdup(a); \
-	char *s1 = ft_memcpy(s, b, c); \
-	char *s2 = memcpy(p, b, c); \
-	if (*s1 != *s2) f++; \
-	if (strcmp(s, p) != 0) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\", \"%s\", %zu]\n", a, b, c);}\
-	free(s); free(p);  })
-
-# define MEMMOVE1(a, b, c) ( {\
-	int f = 0; \
-	char *s = strdup(a); char *p = strdup(a); \
-	char *s1 = ft_memmove(s, b, c); \
-	char *s2 = memmove(p, b, c); \
-	if (*s1 != *s2) f++; \
-	if (strcmp(s, p) != 0) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\", \"%s\", %d]\n", a, b, c); \
-	PSY(s1); PSL(s2);} \
-	free(s); free(p); })
-
-
-# define MEMMOVE2(a, b, c) ( {\
-	int f = 0; \
-	char *s = strdup(a); char *p = strdup(a);\
-	char *s1 = ft_memmove(s, s + b, c); \
-	char *s2 = memmove(p, p + b, c); \
-	if (*s1 != *s2) f++; \
-	if (strcmp(s, p) != 0) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\", \"%s\" + %d, %d]\n", a, a, b, c); \
-	PSY(s1); PSL(s2);} \
-	free(s); free(p); })
-
-# define MEMMOVE3(a, b, c) ( {\
-	int f = 0; \
-	char *s = strdup(a); char *p = strdup(a);\
-	char *s1 = ft_memmove(s + b, s, c); \
-	char *s2 = memmove(p + b, p, c); \
-	if (*s1 != *s2) f++; \
-	if (strcmp(s, p) != 0) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\" + %d, \"%s\", %d]\n", a, b, a, c); \
-	PSY(s1); PSL(s2);} \
-	free(s); free(p); })
-
-# define MEMSET(a, b, c) ( {\
-	int f = 0; \
-	char *s = strdup(a); char *p = strdup(a);\
-	char *s1 = ft_memset(s, b, c); \
-	char *s2 = memset(p, b, c); \
-	if (*s1 != *s2) f++; \
-	if (strcmp(s, p) != 0) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\", \'%c\', %d]\n", a, b, c); \
-	PSY(s1); PSL(s2);} \
-	free(s); free(p); })
-
-# define STRCHR(a, b) ( {\
-	int f = 0; \
-	char *s1 = ft_strchr(a, b); \
-	char *s2 = strchr(a, b); \
-	if (!s1 || !s2) {if (!s1 && !s2) ; else {printf("argument[\"%s\", \'%c\']\n", a, b);} }\
-	else {if (*s1 != *s2) f++; \
-	if (strcmp(s1, s2) != 0) f++; \
-	if (f != 0) {NO ;printf("argument[\"%s\", \'%c\']\n", a, b); \
-	PSY(s1); PSL(s2);}}})
-
-# define STRDUP(a) ( {\
-	int f = 0; \
-	char *s1 = ft_strdup(a); \
-	char *s2 = strdup(a); \
-	if (strcmp(s1, s2) != 0) f++; \
-	if (s1[strlen(a)] != s2[strlen(a)]) f++; \
-	if (f != 0) {NO; printf("argument[\"%s\"]\n", a); \
-	PSY(s1); PSL(s2);} \
-	free(s1); free(s2);})
-
-# define STRLEN(a)( { \
-	size_t i = ft_strlen(a); size_t j = strlen(a); \
-	if (i == j) ; else {{NO; printf("argument[\"%s\"]\n", a); \
-	PSTY(i); PSTL(j);}}1;})
-
+int		MEMSET(char *a, char b, char c);
+int		STRCHR(char *a, char b);
+int			STRDUP(char *a);
+int			STRLEN(char *a);
 int			STRLCAT(char *a, char *b, size_t c);
 int			STRLCPY(char *a, char *b, size_t c);
 int			STRNCMP(char *a, char *b, int c);

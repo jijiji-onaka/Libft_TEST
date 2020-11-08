@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp_test.c                                     :+:      :+:    :+:   */
+/*   toupper_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:24:18 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:36 by tjinichi         ###   ########.fr       */
+/*   Created: 2020/11/08 18:15:38 by tjinichi          #+#    #+#             */
+/*   Updated: 2020/11/08 18:16:23 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 #include "libft.h"
 
-int			STRNCMP(char *a, char *b, int c)
+int		UPPER(int a)
 {
-	int i = ft_strncmp(a, b, c);
-	int j = strncmp(a, b, c);
-	if (sign_check(i) != sign_check(j))
+	char i = ft_toupper(a);
+	char j = toupper(a);
+	if (i != j)
 	{
-		printf("argument[\"%s\", \"%s\", %d]\n", a, b, c);
-		PDY(i);
-		PDL(j);
+		PC(a);
+		PCY(i);
+		PCL(j);
 		P
 		return (1);
 	}

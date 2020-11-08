@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp_test.c                                     :+:      :+:    :+:   */
+/*   strlen_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:24:18 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:36 by tjinichi         ###   ########.fr       */
+/*   Created: 2020/11/08 17:38:22 by tjinichi          #+#    #+#             */
+/*   Updated: 2020/11/08 17:40:06 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 #include "libft.h"
 
-int			STRNCMP(char *a, char *b, int c)
+int		STRLEN(char *a)
 {
-	int i = ft_strncmp(a, b, c);
-	int j = strncmp(a, b, c);
-	if (sign_check(i) != sign_check(j))
+	size_t i = ft_strlen(a);
+	size_t j = strlen(a);
+	if (i != j)
 	{
-		printf("argument[\"%s\", \"%s\", %d]\n", a, b, c);
-		PDY(i);
-		PDL(j);
-		P
+		printf("argument[\"%s\"]\n", a);
+		PSTY(i);
+		PSTL(j);
+		P;
 		return (1);
 	}
 	return (0);

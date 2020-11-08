@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp_test.c                                     :+:      :+:    :+:   */
+/*   isdigit_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:24:18 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:36 by tjinichi         ###   ########.fr       */
+/*   Created: 2020/11/08 18:19:48 by tjinichi          #+#    #+#             */
+/*   Updated: 2020/11/08 18:20:56 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 #include "libft.h"
 
-int			STRNCMP(char *a, char *b, int c)
+int		DIGIT(int a)
 {
-	int i = ft_strncmp(a, b, c);
-	int j = strncmp(a, b, c);
+	int i = ft_isdigit(a);
+	int j = isdigit(a);
 	if (sign_check(i) != sign_check(j))
 	{
-		printf("argument[\"%s\", \"%s\", %d]\n", a, b, c);
+		PD(a);
 		PDY(i);
 		PDL(j);
 		P

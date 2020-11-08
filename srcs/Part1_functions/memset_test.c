@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp_test.c                                     :+:      :+:    :+:   */
+/*   memset_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:24:18 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:36 by tjinichi         ###   ########.fr       */
+/*   Created: 2020/11/08 17:48:54 by tjinichi          #+#    #+#             */
+/*   Updated: 2020/11/08 17:50:09 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 #include "libft.h"
 
-int			STRNCMP(char *a, char *b, int c)
+int		MEMSET(char *a, char b, char c)
 {
-	int i = ft_strncmp(a, b, c);
-	int j = strncmp(a, b, c);
-	if (sign_check(i) != sign_check(j))
+	int f = 0;
+	char *s = strdup(a);
+	char *p = strdup(a);
+	char *s1 = ft_memset(s, b, c);
+	char *s2 = memset(p, b, c);
+	if (*s1 != *s2)
+		f = 1;
+	if (strcmp(s, p) != 0)
+		f = 1;
+	if (f != 0)
 	{
-		printf("argument[\"%s\", \"%s\", %d]\n", a, b, c);
-		PDY(i);
-		PDL(j);
-		P
-		return (1);
+		printf("argument[\"%s\", \'%c\', %d]\n", a, b, c);
+		PSY(s1);
+		PSL(s2);
+		P;
 	}
-	return (0);
+	free(s);
+	free(p);
+	return (f);
 }

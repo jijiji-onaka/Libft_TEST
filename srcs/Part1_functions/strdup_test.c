@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp_test.c                                     :+:      :+:    :+:   */
+/*   strdup_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:24:18 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:36 by tjinichi         ###   ########.fr       */
+/*   Created: 2020/11/08 17:42:42 by tjinichi          #+#    #+#             */
+/*   Updated: 2020/11/08 17:44:56 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 #include "libft.h"
 
-int			STRNCMP(char *a, char *b, int c)
+int		STRDUP(char *a)
 {
-	int i = ft_strncmp(a, b, c);
-	int j = strncmp(a, b, c);
-	if (sign_check(i) != sign_check(j))
+	int f = 0;
+	char *s1 = ft_strdup(a);
+	char *s2 = strdup(a);
+	if (strcmp(s1, s2) != 0)
+		f = 1;
+	if (s1[strlen(a)] != s2[strlen(a)])
+		f = 1;
+	if (f != 0)
 	{
-		printf("argument[\"%s\", \"%s\", %d]\n", a, b, c);
-		PDY(i);
-		PDL(j);
-		P
-		return (1);
+		printf("argument[\"%s\"]\n", a);
+		PSY(s1);
+		PSL(s2);
 	}
-	return (0);
+	free(s1);
+	free(s2);
+	return (f);
 }

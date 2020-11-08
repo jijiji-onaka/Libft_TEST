@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncmp_test.c                                     :+:      :+:    :+:   */
+/*   memcmp_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjinichi <tjinichi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/08 15:24:18 by tjinichi          #+#    #+#             */
-/*   Updated: 2020/11/08 18:03:36 by tjinichi         ###   ########.fr       */
+/*   Created: 2020/11/08 18:01:55 by tjinichi          #+#    #+#             */
+/*   Updated: 2020/11/08 18:03:50 by tjinichi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../test.h"
 #include "libft.h"
 
-int			STRNCMP(char *a, char *b, int c)
+int		MEMCMP(char *a, char *b, size_t c)
 {
-	int i = ft_strncmp(a, b, c);
-	int j = strncmp(a, b, c);
+	int f = 0;
+	char *s = strdup(a);
+	char *p = strdup(b);
+	int i = ft_memcmp(s, p, c);
+	int j = memcmp(s, p, c);
 	if (sign_check(i) != sign_check(j))
+		f = 1;
+	if (f != 0)
 	{
-		printf("argument[\"%s\", \"%s\", %d]\n", a, b, c);
+		printf("argument[\"%s\", \"%s\", %zu]\n", a, b, c);
 		PDY(i);
 		PDL(j);
-		P
-		return (1);
+		P;
 	}
-	return (0);
+	free(s);
+	free(p);
+	return (f);
 }
